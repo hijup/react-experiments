@@ -70,7 +70,9 @@ const Parametrize = React.createClass({
     });
 
     return (
-      { renderedChildren }
+      <div>
+        { renderedChildren }
+      </div>
     );
   },
 
