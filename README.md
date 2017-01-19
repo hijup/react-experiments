@@ -1,22 +1,18 @@
 # react-experiments
-[![Build Status](https://travis-ci.org/HubSpot/react-experiments.svg?branch=master)](https://travis-ci.org/HubSpot/react-experiments)
 
-
-react-experiments is a set of React components for implementing UI experiments.
-
-For additional context behind why we built this, check out the accompanying [blog post](http://product.hubspot.com/blog/product-experimentation-with-planout-and-react.js)
+react-experiments is a set of React components for implementing UI experiments. This is a fork of https://github.com/HubSpot/react-experiments.
 
 # Installation
 
 ```
-npm install react-experiments
+npm install --save hijup-react-experiments
 ```
 
 # Usage
 
-**If you are using React 0.13 the latest supported version is 3.0.1**
+**If you are using React 0.13 the latest supported version is 3.0.1**.
 
-react-experiments was built to work with [PlanOut.js](https://www.github.com/HubSpot/PlanOut.js) and most of its constructs are inspired by the structure of PlanOut.js. This library will work out of the box if you pass it an instantiated PlanOut Namespace or Experiment class, but if you want to use your own methods of assigning experiment parameters and logging exposure then you can extend the base [experiment class](https://github.com/HubSpot/react-experiments/blob/master/src/Experiment.js) and pass that as the experiment class prop.
+react-experiments was built to work with [PlanOut.js](https://www.github.com/HubSpot/PlanOut.js) and most of its constructs are inspired by the structure of PlanOut.js. This library will work out of the box if you pass it an instantiated PlanOut Namespace or Experiment class, but if you want to use your own methods of assigning experiment parameters and logging exposure then you can extend the base [experiment class](https://github.com/hijup/react-experiments/blob/master/src/Experiment.js) and pass that as the experiment class prop.
 
 ## Implementing a simple experiment
 
@@ -174,3 +170,9 @@ This project is written using ES6 and all build steps / transpilation are done b
 To test API changes locally, open the examples/index.html file locally after building with your most recent changes. The index.html file contains a simple example of using this library paired with the [PlanOut.js sample experiment](https://github.com/HubSpot/PlanOut.js/blob/master/examples/sample_planout_es5.js).
 
 Please be sure to add tests to this project when making changes. This project uses [Jest](https://facebook.github.io/jest/) for running tests. Tests can be run either by building the project using build.sh or by using ```npm test```.
+
+## License
+MIT. Copyright Gustavo Vargas, Guy Aridor, Matthew Rheault, HIJUP team, and other contributors. 
+
+## Acknowledgement
+This library is fork of https://github.com/HubSpot/react-experiments. Copyright: Gustavo Vargas, Guy Aridor, and Matthew Rheault. License: MIT.

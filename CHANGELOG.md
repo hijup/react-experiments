@@ -1,3 +1,8 @@
+# Changes in 5.0.0
+Breaking changes:
+- Now React is peer dependency so React Experiments will use the same React with your app. There is good chance you will not need to do anything (hence no breaking change for you).
+- Replacing parametrized experiment's child wrapper with `<div>` (formerly `<span>`).
+
 # Changes in 4.1.0
 - Now transpile using babel 6 instead of babel 4
 
