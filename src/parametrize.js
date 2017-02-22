@@ -2,9 +2,7 @@ import React from 'react';
 
 const Parametrize = React.createClass({
   propTypes: {
-    // We don't accept multiple React elements as children. So the children technically is
-    // "child" (singular).
-    children: React.PropTypes.element.isRequired,
+    children: React.PropTypes.node.isRequired,
   },
 
   getInitialState() {
@@ -62,22 +60,25 @@ const Parametrize = React.createClass({
   },
 
   renderExperiment() {
-    if (!this.state.experimentParameters) {
+    const { experimentParameters } = this.state;
+    if (!experimentParameters) {
       return null;
     }
 
-    const passThrough = this.props._passThrough;
-    let renderedChildren;
-    if (passThrough) {
-      renderedChildren = React.cloneElement(
-        React.Children.only(this.props.children),
-        this.state.experimentParameters
-      );
-    } else {
-      renderedChildren = this.props.children;
-    }
+    const { children, _passThrough: passThrough } = this.props;
 
-    return renderedChildren;
+    if (React.Children.count(children) > 1) {
+      const renderedChildren = React.Children.map(children, (child) => {
+        if (passThrough) {
+          return React.cloneElement(child, experimentParameters);
+        }
+        return child;
+      });
+      return <div>{renderedChildren}</div>;
+    } else if (passThrough) {
+      return React.cloneElement(React.Children.only(children), experimentParameters);
+    }
+    return children;
   },
 
   render() {
