@@ -332,6 +332,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Parametrize = _react2.default.createClass({
 	  displayName: "Parametrize",
+
+	  propTypes: {
+	    // We don't accept multiple React elements as children. So the children technically is
+	    // "child" (singular).
+	    children: _react2.default.PropTypes.element.isRequired
+	  },
+
 	  getInitialState: function getInitialState() {
 	    return {
 	      experimentParameters: null
@@ -388,26 +395,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	  },
 	  renderExperiment: function renderExperiment() {
-	    var _this = this;
-
 	    if (!this.state.experimentParameters) {
 	      return null;
 	    }
 
 	    var passThrough = this.props._passThrough;
-	    var renderedChildren = _react2.default.Children.map(this.props.children, function (child) {
-	      if (passThrough) {
-	        return _react2.default.cloneElement(child, _this.state.experimentParameters);
-	      } else {
-	        return _react2.default.cloneElement(child, {});
-	      }
-	    });
+	    var renderedChildren = void 0;
+	    if (passThrough) {
+	      renderedChildren = _react2.default.cloneElement(_react2.default.Children.only(this.props.children), this.state.experimentParameters);
+	    } else {
+	      renderedChildren = this.props.children;
+	    }
 
-	    return _react2.default.createElement(
-	      "div",
-	      null,
-	      renderedChildren
-	    );
+	    return renderedChildren;
 	  },
 	  render: function render() {
 	    return this.renderExperiment();
