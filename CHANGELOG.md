@@ -1,3 +1,7 @@
+# Changes in 6.0.0
+Breaking changes:
+- `<Parametrize>` that only have one children will be rendered without wrapper. This wrapper usually cause problem because it break HTML semantic and layout.
+
 # Changes in 5.0.0
 Breaking changes:
 - Now React is peer dependency so React Experiments will use the same React with your app. There is good chance you will not need to do anything (hence no breaking change for you).
