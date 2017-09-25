@@ -1,3 +1,6 @@
+# Changes in 6.1.0
+- Update dependencies (698b341).
+
 # Changes in 6.0.0
 Breaking changes:
 - `<Parametrize>` that only have one children will be rendered without wrapper. This wrapper usually cause problem because it break HTML semantic and layout.
