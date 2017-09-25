@@ -26,6 +26,7 @@
     "type": "git",
     "url": "https://github.com/hijup/react-experiments"
   },
+  "files": ["dist"],
   "keywords": [
     "ab",
     "a/b",
