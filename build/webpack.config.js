@@ -9,7 +9,7 @@ module.exports = {
         query: {
           cacheDirectory: true,
           presets: ['react', 'env'],
-          plugins: ['add-module-exports']
+          plugins: ['transform-class-properties', 'add-module-exports']
         }
       },
     ]

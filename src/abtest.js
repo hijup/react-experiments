@@ -1,22 +1,20 @@
 import React from 'react';
 import Parametrize from './parametrize';
 
-const ABTest = React.createClass({
-  getInitialState() {
-    return {
-      hasRendered: false
-    };
-  },
+class ABTest extends React.Component {
+  state = {
+    hasRendered: false
+  };
 
-  enrolledInVariation() {
+  enrolledInVariation = () => {
     if (!this.state.hasRendered) {
       this.setState({
         hasRendered: true
       });
     }
-  },
+  };
 
-  renderExposedVariation() {
+  renderExposedVariation = () => {
     const { on, experiment } = this.props;
 
     if (!experiment) {
@@ -28,22 +26,22 @@ const ABTest = React.createClass({
     }
 
     return (
-      <Parametrize 
-        experiment={experiment} 
+      <Parametrize
+        experiment={experiment}
         params={[on]}
-        on={on} 
-        enrolledInVariation={this.enrolledInVariation} 
+        on={on}
+        enrolledInVariation={this.enrolledInVariation}
         hasRendered={this.state.hasRendered}>
 
           {this.props.children}
 
       </Parametrize>
     );
-  },
+  };
 
   render() {
     return this.renderExposedVariation();
   }
-});
+}
 
 export default ABTest;
