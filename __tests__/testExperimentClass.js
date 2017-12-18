@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import ReactExperiments from '../dist/react-experiments';
 
 let logs = [];
@@ -32,10 +33,10 @@ describe('Test experiment', () => {
   });
 
   it('should work with experiment Class', () => {
-    const Comp = React.createClass({
-      contextTypes: {
-        experimentParameters: React.PropTypes.object.isRequired
-      },
+    class Comp extends React.Component {
+      static contextTypes = {
+        experimentParameters: PropTypes.object.isRequired
+      };
 
       render() {
         return (
@@ -44,7 +45,7 @@ describe('Test experiment', () => {
           </div>
         );
       }
-    });
+    };
 
     const parametrized = TestUtils.renderIntoDocument(
       <ReactExperiments.Parametrize experiment={exp} params={[paramKey]}>

@@ -1,28 +1,27 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-export const When = React.createClass({
-  getInitialState() {
-    return {
-      shouldRender: false
-    }
-  },
+export class When extends React.Component {
+  static contextTypes = {
+    experimentParameters: PropTypes.object.isRequired,
+    experimentProps: PropTypes.object.isRequired
+  };
 
-  contextTypes: {
-    experimentParameters: React.PropTypes.object.isRequired,
-    experimentProps: React.PropTypes.object.isRequired
-  },
+  state = {
+    shouldRender: false
+  };
 
   componentWillUpdate(props, state) {
     if (state.shouldRender) {
       this.context.experimentProps.enrolledInVariation();
     }
-  },
+  }
 
   componentDidMount() {
     this.shouldRenderVariation();
-  },
+  }
 
-  shouldRenderVariation() {
+  shouldRenderVariation = () => {
     const value = this.props.value;
     const paramName = this.context.experimentProps.on;
     if (this.context.experimentParameters && this.context.experimentParameters[paramName] === value) {
@@ -30,16 +29,16 @@ export const When = React.createClass({
         shouldRender: true
       });
     }
-  },
+  };
 
-  renderChildren() {
+  renderChildren = () => {
     return React.Children.map(this.props.children, (child) => {
       if (React.isValidElement(child)) {
         return React.cloneElement(child, {});
       }
       return child;
     });
-  },
+  };
 
   render() {
     if (!this.state.shouldRender) {
@@ -52,12 +51,12 @@ export const When = React.createClass({
       </span>
     );
   }
-});
+}
 
-export const Default = React.createClass({
-  contextTypes: {
-    experimentProps: React.PropTypes.object.isRequired
-  },
+export class Default extends React.Component {
+  static contextTypes = {
+    experimentProps: PropTypes.object.isRequired
+  };
 
   render() {
     if (this.context.experimentProps.hasRendered) {
@@ -70,4 +69,4 @@ export const Default = React.createClass({
       </span>
     );
   }
-});
+}

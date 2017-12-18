@@ -1,5 +1,5 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import {DefaultNamespace, DefaultEmptyNamespace, expInitializeObject, clearLogs, getLogLength} from './utils/experimentUtils';
 import ReactExperiments from '../dist/react-experiments';
 
@@ -77,10 +77,11 @@ describe('Test that experiment component works with namespaces', () => {
 
   it('works when enrolled in the namespace with parametrize', () => {
     const namespace = new DefaultNamespace(expInitializeObject);
-    let SampleComponent = React.createClass({
-      getClassName() {
+
+    class SampleComponent extends React.Component {
+      getClassName = () => {
         return this.props.foo || 'default'
-      },
+      };
 
       render() {
         return (
@@ -89,7 +90,8 @@ describe('Test that experiment component works with namespaces', () => {
           </div>
         );
       }
-    });
+    }
+
     SampleComponent = ReactExperiments.withExperimentParams(SampleComponent);
     const experimentComponent = TestUtils.renderIntoDocument(
       <ReactExperiments.Parametrize params={['foo']} experiment={namespace}>
@@ -133,10 +135,11 @@ describe('Test that experiment component works with namespaces', () => {
 
   it('default component works when the user is not enrolled in a namespace', () => {
     const emptyNamespace = new DefaultEmptyNamespace(expInitializeObject);
-    let SampleComponent = React.createClass({
-      getClassName() {
+
+    class SampleComponent extends React.Component {
+      getClassName = () => {
         return this.props.foo || 'default'
-      },
+      };
 
       render() {
         return (
@@ -145,7 +148,8 @@ describe('Test that experiment component works with namespaces', () => {
           </div>
         );
       }
-    });
+    }
+
     SampleComponent = ReactExperiments.withExperimentParams(SampleComponent);
     const experimentComponent = TestUtils.renderIntoDocument(
       <ReactExperiments.Parametrize params={['foo']} experiment={emptyNamespace}>
@@ -169,10 +173,11 @@ describe('Test that experiment component works with namespaces', () => {
 
   it('works when a user is enrolled in a different experiment in a namespace', () => {
     const namespace = new DefaultNamespace(expInitializeObject);
-    let SampleComponent = React.createClass({
-      getClassName() {
+
+    class SampleComponent extends React.Component {
+      getClassName = () => {
         return this.props.foobar || 'default'
-      },
+      };
 
       render() {
         return (
@@ -181,7 +186,8 @@ describe('Test that experiment component works with namespaces', () => {
           </div>
         );
       }
-    });
+    }
+
     SampleComponent = ReactExperiments.withExperimentParams(SampleComponent);
     const experimentComponent = TestUtils.renderIntoDocument(
       <ReactExperiments.Parametrize params={['foobar']} experiment={namespace}>

@@ -1,33 +1,32 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const Parametrize = React.createClass({
-  propTypes: {
-    children: React.PropTypes.node.isRequired,
-  },
+class Parametrize extends React.Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+  };
 
-  getInitialState() {
-    return {
-      experimentParameters: null
-    };
-  },
+  state = {
+    experimentParameters: null
+  };
 
-  childContextTypes: {
-    experimentParameters: React.PropTypes.object,
-    experimentProps: React.PropTypes.object.isRequired
-  },
+  static childContextTypes = {
+    experimentParameters: PropTypes.object,
+    experimentProps: PropTypes.object.isRequired
+  };
 
   getChildContext() {
     return {
       experimentParameters: this.state.experimentParameters,
       experimentProps: this.props
     };
-  },
+  }
 
   componentWillMount() {
     this.fetchParameters();
-  },
+  }
 
-  fetchParameters() {
+  fetchParameters = () => {
     const { experiment, params } = this.props;
 
     if (!experiment || !experiment.get) {
@@ -57,9 +56,9 @@ const Parametrize = React.createClass({
     this.setState({
       experimentParameters: paramsObj
     });
-  },
+  };
 
-  renderExperiment() {
+  renderExperiment = () => {
     const { experimentParameters } = this.state;
     if (!experimentParameters) {
       return null;
@@ -79,11 +78,11 @@ const Parametrize = React.createClass({
       return React.cloneElement(React.Children.only(children), experimentParameters);
     }
     return children;
-  },
+  };
 
   render() {
     return this.renderExperiment();
   }
-});
+}
 
 export default Parametrize;
