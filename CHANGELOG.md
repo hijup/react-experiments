@@ -1,3 +1,7 @@
+# Changes in 6.2.0
+- Support React 16 too.
+- Use React 16 for testing.
+
 # Changes in 6.1.0
 - Update dependencies (698b341).
 
